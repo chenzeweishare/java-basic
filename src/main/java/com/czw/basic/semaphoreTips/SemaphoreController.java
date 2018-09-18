@@ -2,7 +2,6 @@ package com.czw.basic.semaphoreTips;
 
 import java.util.concurrent.*;
 
-// import cn.com.gome.rebate.diamond.ReloadableConfig;
 
 /***
  * ReloadableConfig 为分布式配置中心获取值 这可以写死
@@ -28,18 +27,22 @@ public class SemaphoreController {
 	public static <T> T execute(String methodName, Callable<T> r) throws Exception {
 
 		// 默认如果说配置了全局的开启阻塞数，就走全局的阻塞值
-		int globalBlockingCount = 0;//ReloadableConfig.getInt(getGlobalBlockQueueCount(), 0);
+        //ReloadableConfig.getInt(getGlobalBlockQueueCount(), 0);
+		int globalBlockingCount = 0;
 		if (0 != globalBlockingCount) {
-			int timeout = 3000;//ReloadableConfig.getInt(getGlobalBlockQueueTimeOut(), 3000);//
+            //ReloadableConfig.getInt(getGlobalBlockQueueTimeOut(), 3000);
+			int timeout = 3000;
 			return getSemaphoreWarpper(methodName, globalBlockingCount).execute(r, methodName, timeout);
 		}
 
 		// 如果没有配置全局的，就走单独方法配置的值，如果没有配置直接回调
-		int methodBlockingCount = 0;//ReloadableConfig.getInt(getBlockQueueCountByName(methodName), 0);
+        //ReloadableConfig.getInt(getBlockQueueCountByName(methodName), 0);
+		int methodBlockingCount = 0;
 		if (0 == methodBlockingCount) {
 			return r.call();
 		}
-		int timeout =3000;// ReloadableConfig.getInt(getBlockQueueTimeOutByName(methodName), 3000);
+        // ReloadableConfig.getInt(getBlockQueueTimeOutByName(methodName), 3000);
+		int timeout =3000;
 		return getSemaphoreWarpper(methodName, methodBlockingCount).execute(r, methodName, timeout);
 	}
 
@@ -72,7 +75,8 @@ public class SemaphoreController {
 			public void run() {
 				if (!blockingQueues.isEmpty()) {
 					for (String key : blockingQueues.keySet()) {
-						int newCount =0;// ReloadableConfig.getInt(getBlockQueueCountByName(key), 0);
+                        // ReloadableConfig.getInt(getBlockQueueCountByName(key), 0);
+						int newCount =0;
 						if (0 != newCount) {
 							int oldCount = blockingQueues.get(key).getQueueCount();
 							if (newCount != oldCount) {
