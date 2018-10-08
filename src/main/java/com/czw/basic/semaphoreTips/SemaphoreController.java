@@ -18,11 +18,42 @@ public class SemaphoreController {
 		}
 	});
 
-	static {
+    private static final ConcurrentHashMap<String, SemaphoreWarpper> blockingQueues = new ConcurrentHashMap<String, SemaphoreWarpper>();
+
+
+    static {
 		syncBlockingQueueCount();
 	}
 
-	private static final ConcurrentHashMap<String, SemaphoreWarpper> blockingQueues = new ConcurrentHashMap<String, SemaphoreWarpper>();
+
+    /**
+     * 同步block数值用的, 主要是定时重置信号量数据, 第一次是10秒钟后重置, 剩下15秒钟后重置
+     */
+    private static void syncBlockingQueueCount() {
+        // 定时去跑监控diamond的值是否有改变
+        scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                if (!blockingQueues.isEmpty()) {
+                    for (String key : blockingQueues.keySet()) {
+                        // ReloadableConfig.getInt(getBlockQueueCountByName(key), 0);
+                        int newCount =0;
+                        //有值时
+                        if (0 != newCount) {
+                            int oldCount = blockingQueues.get(key).getQueueCount();
+                            if (newCount != oldCount) {
+                                log.info("blockingQueueCount modify,methodName:" + key + ",old:" + oldCount + ",new:" + newCount);
+                                //重置信号数量, 并不是释放, 只是再次创建
+                                blockingQueues.get(key).resetSemaphore(newCount);
+                            }
+                        }
+                    }
+                }
+            }
+        //毫秒  10秒, 15秒钟
+        }, 10000, 15000, TimeUnit.MILLISECONDS);
+    }
+
 
 	public static <T> T execute(String methodName, Callable<T> r) throws Exception {
 
@@ -46,6 +77,8 @@ public class SemaphoreController {
 		return getSemaphoreWarpper(methodName, methodBlockingCount).execute(r, methodName, timeout);
 	}
 
+
+
 	public static SemaphoreWarpper getSemaphoreWarpper(String method, int blockingCount) {
 		SemaphoreWarpper bqw = blockingQueues.get(method);
 		if (null == bqw) {
@@ -63,31 +96,6 @@ public class SemaphoreController {
 
 	public static SemaphoreWarpper getSemaphoreWarpper(String method) {
 		return blockingQueues.get(method);
-	}
-
-	/**
-	 * 同步block数值用的
-	 */
-	private static void syncBlockingQueueCount() {
-		// 定时去跑监控diamond的值是否有改变
-		scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
-			@Override
-			public void run() {
-				if (!blockingQueues.isEmpty()) {
-					for (String key : blockingQueues.keySet()) {
-                        // ReloadableConfig.getInt(getBlockQueueCountByName(key), 0);
-						int newCount =0;
-						if (0 != newCount) {
-							int oldCount = blockingQueues.get(key).getQueueCount();
-							if (newCount != oldCount) {
-								log.info("blockingQueueCount modify,methodName:" + key + ",old:" + oldCount + ",new:" + newCount);
-								blockingQueues.get(key).resetSemaphore(newCount);
-							}
-						}
-					}
-				}
-			}
-		}, 10000, 15000, TimeUnit.MILLISECONDS);
 	}
 
 	public static String getBlockQueueCountByName(String methodName) {

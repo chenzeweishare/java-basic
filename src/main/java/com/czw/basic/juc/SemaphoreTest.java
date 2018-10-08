@@ -1,4 +1,4 @@
-package com.czw.basic.semaphoreTips;
+package com.czw.basic.juc;
 
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
