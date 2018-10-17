@@ -9,10 +9,12 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+//包装类
 public class SemaphoreWarpper {
 
 	private static final Logger log = LoggerFactory.getLogger(SemaphoreWarpper.class.getName());
 
+	//默认20个进程
 	private volatile int queueCount = 20;
 
 	public SemaphoreWarpper(int queueCount) {
@@ -22,12 +24,17 @@ public class SemaphoreWarpper {
 
 	protected Semaphore semaphore;
 
+	//重入读写锁
 	protected ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
+	//原子0
 	protected AtomicInteger blockingCount = new AtomicInteger(0);
 
+
+	//执行, 线程安全为什么还要加锁
 	public <T> T execute(Callable<T> r, String methodName, int timeout) throws Exception {
 		T obj = null;
+		//获取读取锁，除非当前线程被中断。
 		lock.readLock().lockInterruptibly();
 		try {
 			blockingCount.addAndGet(1);
@@ -53,7 +60,7 @@ public class SemaphoreWarpper {
 	}
 
 	/**
-	 * 重置信号数量
+	 * 重置信号数量, 并不是释放, 只是再次创建
 	 */
 	public void resetSemaphore(int count) {
 		lock.writeLock().lock();

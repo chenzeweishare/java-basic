@@ -1,13 +1,18 @@
-package com.czw.basic.semaphoreTips;
+package com.czw.basic.juc;
 
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
+/**
+ * @author Administrator
+ */
 public class SemaphoreExample {
-    static final Semaphore semaphor=new Semaphore(10);//允许10个线程获取许可.最大的并发数量
-
+    /**
+     * 允许10个线程获取许可.最大的并发数量
+     */
+    static final Semaphore semaphor=new Semaphore(10);
     public static void main(String[] args) {
 
         ExecutorService executorService= Executors.newCachedThreadPool();
