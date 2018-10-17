@@ -15,7 +15,7 @@ package com.czw.basic.juc;/*
 import java.util.concurrent.CountDownLatch;
 
 public class CountDownLatchDemo2 {
-  static CountDownLatch c = new CountDownLatch(1);
+  static CountDownLatch c = new CountDownLatch(2);
   public static void main(String[] args) throws InterruptedException {
     new Thread(()->{
 
