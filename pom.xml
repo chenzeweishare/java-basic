@@ -35,6 +35,14 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!--activeMq-->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-all</artifactId>
+            <version>5.15.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
