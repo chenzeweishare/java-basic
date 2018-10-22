@@ -1,4 +1,4 @@
-package lang;
+package java.lang;
 
 /**
  * 测试类加载中的
