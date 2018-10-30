@@ -1,0 +1,44 @@
+Compiled from "Math.java"
+class Math {
+  public static final java.lang.Integer CONSTANT_1;
+
+  Math();
+    Code:
+       0: aload_0		//从局部变量0中装载引用类型值
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V   调用需要特殊处理的实例方法
+       4: return		//方法返回
+
+  public int math();
+    Code:
+       0: iconst_1  	//将int类型常量1压入栈
+       1: istore_1      //将int类型值存入局部变量1
+       2: iconst_2 		//将int类型常量2压入栈
+       3: istore_2 		//将int类型值存入局部变量2
+       4: iload_1		//从局部变量1中装载int类型值
+       5: iload_2		//从局部变量2中装载int类型值
+       6: iadd			//加
+       7: bipush        10   // 将一个8位带符号整数压入栈
+       9: imul			//乘
+      10: istore_3		//将int类型值存入局部变量3
+      11: iload_3		//从局部变量3中装载int类型值
+      12: ireturn		//方法返回
+
+  public static void main(java.lang.String[]);
+    Code:
+       0: new           #2                  // class Math 创建一个对象，并将其引用值压入栈顶
+       3: dup								//复制栈顶部一个字长内容
+       4: invokespecial #3                  // Method "<init>":()V 调用超类构造方法，实例初始化方法，私有方法
+       7: astore_1							// 将引用类型或returnAddress类型值存入局部变量1
+       8: getstatic     #4                  // Field java/lang/System.out:Ljava/io/PrintStream;  从类中获取静态字段
+      11: aload_1							//从局部变量1中装载引用类型值
+      12: invokevirtual #5                  // Method math:()I	调度对象的实便方法
+      15: invokevirtual #6                  // Method java/io/PrintStream.println:(I)V
+      18: return
+
+  static {};
+    Code:
+       0: sipush        666
+       3: invokestatic  #7                  // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       6: putstatic     #8                  // Field CONSTANT_1:Ljava/lang/Integer;
+       9: return
+}

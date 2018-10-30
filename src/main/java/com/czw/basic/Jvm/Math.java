@@ -18,8 +18,8 @@ class Math{
 		Math math = new Math();
 		math.math();
 		Map<String, String> map = new HashMap<>();
-		map.put("test", "test");
-		new Thread().start();
+		map.put("test", "test"); //map引用了HashMap(),
+		new Thread().start(); //本地方法栈 native
 		System.out.println("end");
 	}
 }
