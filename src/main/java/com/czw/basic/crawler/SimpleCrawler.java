@@ -7,6 +7,9 @@ import jodd.util.StringUtil;
 
 import static jodd.jerry.Jerry.jerry;
 
+/**
+ * 爬虫系列
+ */
 public class SimpleCrawler {
 
     //抓取拉钩网数据地址
