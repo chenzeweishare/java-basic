@@ -1,6 +1,8 @@
 package com.czw.basic.Jvm;
 
-
+/**
+ * -verbose:class 类加载不是jar包中所有的类都加载
+ */
 public class TestDynamicLoad {
 
     static {

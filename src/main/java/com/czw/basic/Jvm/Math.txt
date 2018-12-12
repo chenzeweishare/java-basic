@@ -6,7 +6,7 @@ public class com.czw.basic.Jvm.Demo {
        1: invokespecial #1                  // Method java/lang/Object."<init>":()V
        4: return
 
-  public static void main(java.lang.String[]);
+  public static void main(java.String[]);
     Code:
        0: new           #2                  // class com/czw/basic/Jvm/Math
        3: dup
