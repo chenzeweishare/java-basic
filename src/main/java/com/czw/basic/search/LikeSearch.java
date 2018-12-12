@@ -19,16 +19,16 @@ public class LikeSearch<T> {
     public void put(T t,String value){
          w.lock();
          try {
-             char[] chars = value.toCharArray();
-             for (int i = 0; i < chars.length; i++) {
-                 char c = chars[i];//百
-                 CharCloumn<T> cloumn = columns[c];
-                 if (cloumn == null) {
-                     cloumn = new CharCloumn<T>();
-                     columns[c] = cloumn;
-                 }
-                 cloumn.add(t, (byte) i);
-             }
+//             char[] chars = value.toCharArray();
+//             for (int i = 0; i < chars.length; i++) {
+//                 char c = chars[i];//百
+//                 CharCloumn<T> cloumn = columns[c];
+//                 if (cloumn == null) {
+//                     cloumn = new CharCloumn<T>();
+//                     columns[c] = cloumn;
+//                 }
+//                 cloumn.add(t, (byte) i);
+//             }
          }finally {
              w.unlock();
          }
@@ -71,30 +71,30 @@ public class LikeSearch<T> {
         r.lock();
 
         try{
-            int n=word.length();
-            char chars[]=word.toCharArray();
-            Context context=new Context();
-            for(int i=0;i<chars.length;i++){
-                CharCloumn<T>  column=columns[chars[i]];
-                if(column==null){
-                    break;
-                }
-                if(!context.filter(column)){
-                    break;
-                }
-                n--;
-
-            }
-            if(n==0){
-
-                return context.limit(limit);
-
-            }
-        return Collections.emptySet();
+//            int n=word.length();
+//            char chars[]=word.toCharArray();
+//            Context context=new Context();
+//            for(int i=0;i<chars.length;i++){
+//                CharCloumn<T>  column=columns[chars[i]];
+//                if(column==null){
+//                    break;
+//                }
+//                if(!context.filter(column)){
+//                    break;
+//                }
+//                n--;
+//
+//            }
+//            if(n==0){
+//
+//                return context.limit(limit);
+//
+//            }
+//        return Collections.emptySet();
         }finally {
             r.unlock();
         }
-
+        return null;
     }
 
 

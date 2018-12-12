@@ -22,15 +22,15 @@ public class MonitorThreadPoolUtil implements Runnable
     public void run()
     {
         while(run){
-            System.out.println(
-                    String.format("[monitor] 池大小:%d,核心数：%d, 活跃数: %d, 完成数: %d, 任务数: %d, 线程结束没: %s, 任务结束没: %s",
-                            this.executor.getPoolSize(),
-                            this.executor.getCorePoolSize(),
-                            this.executor.getActiveCount(),
-                            this.executor.getCompletedTaskCount(),
-                            this.executor.getTaskCount(),
-                            this.executor.isShutdown(),
-                            this.executor.isTerminated()));
+//            System.out.println(
+//                    String.format("[monitor] 池大小:%d,核心数：%d, 活跃数: %d, 完成数: %d, 任务数: %d, 线程结束没: %s, 任务结束没: %s",
+//                            this.executor.getPoolSize(),
+//                            this.executor.getCorePoolSize(),
+//                            this.executor.getActiveCount(),
+//                            this.executor.getCompletedTaskCount(),
+//                            this.executor.getTaskCount(),
+//                            this.executor.isShutdown(),
+//                            this.executor.isTerminated()));
             try {
                 Thread.sleep(seconds*1000);
             } catch (InterruptedException e) {

@@ -36,6 +36,12 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
+
+
         <!--activeMq-->
         <dependency>
             <groupId>org.apache.activemq</groupId>
