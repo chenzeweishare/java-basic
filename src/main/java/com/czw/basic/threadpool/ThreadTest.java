@@ -10,7 +10,7 @@ public class ThreadTest {
         Long start=System.currentTimeMillis();
         final Random random=new Random();
         final  List<Integer> list=new ArrayList<Integer>();
-        for (int i=0;i<100000;i++){
+        for (int i=0;i<10000;i++){
           Thread thread = new Thread(){
                 @Override
                 public void run() {
@@ -18,10 +18,11 @@ public class ThreadTest {
 
                 }
             };
+            System.out.println(i);
             thread.start();
             thread.join();
         }
-        System.out.println(System.currentTimeMillis()-start);
+        System.out.println("耗时: "+ (System.currentTimeMillis()-start));
         System.out.println(list.size());
 
     }
