@@ -1,0 +1,5 @@
+1. 同一个类里面去调用是不起作用的,  相当于@Transactional 注解一样, 被动态代理了
+2. 需要在Application加上@EnableAsync
+3. 需要引入Executor的bean
+4. 对于需要返回结果的线程CompletableFuture并不能减少时间, 和不加一样的时间, 但是开启多个线程去执行时候CompletableFuture就会有明显的节省时间
+5. 与@Transactional的结合使用, 需要把@Transactional再开一个方法写在内部
