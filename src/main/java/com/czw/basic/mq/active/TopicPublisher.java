@@ -40,7 +40,7 @@ public class TopicPublisher {
             //默认重试次数是多少
             //ack的确认方式
 
-            for (int i = 1; i <= 3; i++) {
+            for (int i = 1; i <= 10; i++) {
                 TextMessage message = session.createTextMessage("发送消息 " + i);
                 producer.send(myTestTopic, message);
             }
