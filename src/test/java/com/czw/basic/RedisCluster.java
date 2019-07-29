@@ -29,7 +29,7 @@ public class RedisCluster {
         config.setTestOnBorrow(true);
         //connectionTimeout：指的是连接一个url的连接等待时间
         //soTimeout：指的是连接上一个url，获取response的返回等待时间
-        JedisCluster jedisCluster = new JedisCluster(jedisClusterNode, 6000, 5000, 10, "C", config);
+        JedisCluster jedisCluster = new JedisCluster(jedisClusterNode, 6000, 5000, 10, "czw", config);
         System.out.println(jedisCluster.set("student", "zhuge"));
         System.out.println(jedisCluster.set("age", "19"));
 

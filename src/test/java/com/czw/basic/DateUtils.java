@@ -1,5 +1,7 @@
 package com.czw.basic;
 
+import jodd.datetime.JDateTime;
+
 /**
  * @auth czw
  * @date 2018-12-12
@@ -9,13 +11,14 @@ public class DateUtils {
 
     public static void main(String[] args) throws Exception {
 
-        try {
-            int i = 1 / 0;
-        } catch (Exception e) {
-            throw new Exception("xxxx");
+        JDateTime jDateTime = new JDateTime();
+        jDateTime.setHour(12);
+        jDateTime.setMinute(0);
+        jDateTime.setSecond(0);
+
+        System.out.println(jDateTime.toString());
+        if (jDateTime.getTimeInMillis() > System.currentTimeMillis()) {
+            System.out.println("xxx");
         }
-
-        System.out.println("ssss");
-
     }
 }
