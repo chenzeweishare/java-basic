@@ -10,6 +10,8 @@ public class StockUtils {
     public static void main(String[] args) {
 
         System.out.println("大吉大利, 今晚吃鸡");
+        getPrice(3.11);
+        getPriceByDiscount(17.60, 3.5);
         getPrice(2.82);
         getPriceByDiscount(3.28, -9.5);
     }
